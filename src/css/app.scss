@@ -1,0 +1,54 @@
+// app global css in SCSS form
+
+// @font-face {
+//     font-family: 'font-lg';
+//     src: url("/src/assets/fonts/Unbounded/Unbounded-Light.ttf");
+// }
+
+// @font-face {
+//     font-family: 'font-md';
+//     src: url("/src/assets/fonts/Unbounded/Unbounded-Medium.ttf");
+// }
+
+// @font-face {
+//     font-family: 'font-reg';
+//     src: url("/src/assets/fonts/Unbounded/Unbounded-Regular.ttf");
+// }
+
+// @font-face {
+//     font-family: 'font-sbl';
+//     src: url("/src/assets/fonts/Unbounded/Unbounded-SemiBold.ttf");
+// }
+
+@font-face {
+  font-family: 'font-th';
+  src: url("/src/assets/fonts/Kanit//Kanit-Thin.ttf");
+}
+
+@font-face {
+  font-family: 'font-lg';
+  src: url("/src/assets/fonts/Kanit/Kanit-Light.ttf");
+}
+
+@font-face {
+  font-family: 'font-md';
+  src: url("/src/assets/fonts/Kanit/Kanit-Medium.ttf");
+}
+
+@font-face {
+  font-family: 'font-reg';
+  src: url("/src/assets/fonts/Kanit/Kanit-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'font-sbl';
+  src: url("/src/assets/fonts/Kanit/Kanit-SemiBold.ttf");
+}
+
+.ds{ border: 2px solid red; }
+
+.font-lg{ font-family: "font-lg"; }
+.font-reg{ font-family: "font-reg"; }
+.font-md{ font-family: "font-md"; }
+.font-reg{ font-family: "font-reg"; }
+.font-sbl{ font-family: "font-sbl"; }
