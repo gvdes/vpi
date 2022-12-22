@@ -10,7 +10,7 @@
     </div>
     <div class="fixed-bottom-left q-pl-sm q-pb-md">
       <q-img
-        src="src/assets/logogv.png"
+        src="~assets/logogv.png"
         spinner-color="primary"
         spinner-size="82px" width="150px"
       />

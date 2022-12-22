@@ -14,7 +14,7 @@
         </q-card-section>
         <q-card-section>
           <q-img
-          src="src/assets/candytoyslogo.png"
+          src="~assets/candytoyslogo.png"
           spinner-color="grey-4"
           spinner-size="82px"
           size="200px"
