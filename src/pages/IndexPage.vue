@@ -13,6 +13,7 @@
         src="~assets/logogv.png"
         spinner-color="primary"
         spinner-size="82px" width="150px"
+        @click="fullScreen"
       />
     </div>
 
@@ -105,6 +106,20 @@
     target.value="";
     nextTick(() => { ipttarget.value.focus(); });
   }
+
+  const fullScreen = () => {
+      console.log("Working....");
+
+      $q.fullscreen.request()
+      .then(() => {
+        nextTick(() => { ipttarget.value.focus(); });
+        console.log("FullsCreen done!!");
+      })
+      .catch(err => {
+        console.log("FullScreen Reject :(");
+        console.log(err);
+      })
+    }
 </script>
 
 <style scoped>
