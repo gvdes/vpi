@@ -8,7 +8,7 @@ import axios from 'axios'
 // "export default () => {}" function below (which runs individually
 // for each client)
 // const vapi = axios.create({ baseURL: 'http://192.168.12.183/vmedia/public/api/verificator' })
-const vapi = axios.create({ baseURL: 'http://192.168.10.15:8100/vmedia/public/api/verificator' });
+const vapi = axios.create({ baseURL: 'http://192.168.10.189:8100/vmedia/public/api/verificator' });
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
