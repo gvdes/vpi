@@ -1,5 +1,9 @@
 <template>
   <q-card flat class="bg-grey-1 q-pa-lg">
+
+    <!-- :ratio="16/9"
+          src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"
+        /> -->
     <!-- <q-card-section>
       {{ imgSource }}
     </q-card-section> -->
@@ -13,12 +17,7 @@
           <div class="text-subtitle">{{ product.description }}</div>
         </q-card-section>
         <q-card-section>
-          <q-img
-          src="~assets/candytoyslogo.png"
-          spinner-color="grey-4"
-          spinner-size="82px"
-          size="200px"
-          />
+          <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" />
         </q-card-section>
       </q-card-section>
 
@@ -30,28 +29,36 @@
           </q-item>
         </q-list>
 
-        <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces"><small>PxC:</small> <span class="text-bold text-green">{{ product.pieces }}</span></div>
+        <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces"><small>PxC:</small> <span
+            class="text-bold text-green">{{ product.pieces }}</span></div>
       </q-card-section>
+
+      <q-card-section v-if="imgSource">
+        <video style="height: 300px; width: 450px;" :src="`https://grupovizcarra.net/vmedia/${product.imgcover}`" autoplay loop muted ></video>
+
+      </q-card-section>
+
+
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 
-  const props = defineProps({
-    data:{ type:Object, default:{}}
-  });
+const props = defineProps({
+  data: { type: Object, default: {} }
+});
 
-  const product = ref(props.data);
+const product = ref(props.data);
 
-  const prices = computed(() => {
-    if(product.value){
-      return product.value.prices.length ? product.value.prices.filter( p => p._type<=2 || p._type==4).sort( (a,b)=> a._type-b._type):[];
-    }else{ return []}
-  });
+const prices = computed(() => {
+  if (product.value) {
+    return product.value.prices.length ? product.value.prices.filter(p => p._type <= 2 || p._type == 4).sort((a, b) => a._type - b._type) : [];
+  } else { return [] }
+});
 
-  const imgSource = computed(() => {
-    return product.value.imgcover ? 'Si tiene imagen':'Si tiene imagen';
-  });
+const imgSource = computed(() => {
+  return product.value.imgcover ? true : false;
+});
 </script>

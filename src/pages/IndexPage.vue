@@ -22,6 +22,7 @@
       <!-- Vista inicial -->
       <template v-if="scst==1">
         <div class="text-center text-blue-grey-12 font-sbl text-h2">Capture código</div>
+        <div class="text-center text-blue-grey-12 font-sbl text-h2">{{ target }}</div>
       </template>
 
       <!-- Buscando producto !!! -->
@@ -97,7 +98,7 @@
     if(response.status==200){
       product.value = response.data.product;
       scst.value=3;
-      // timeouts.value = setTimeout(() => { scst.value=1; }, 25000);
+      // timeouts.value = setTimeout(() => { scst.value=1; }, 30000);
     }else if(response.status==404){
       scst.value=4;
       timeouts.value = setTimeout(() => { scst.value=1; }, 7000);
