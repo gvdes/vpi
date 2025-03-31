@@ -8,6 +8,14 @@ const routes = [
     ]
   },
 
+  {
+    path: '/screen',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/ScreenProtector.vue') }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
