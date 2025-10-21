@@ -44,8 +44,10 @@
     </div>
 
     <q-form @submit="searchTarget" class="fixed-bottom hidded">
-      <q-input autofocus filled dense @focus="inptState = true" @blur="inptState = false" v-model="target"
+      <q-input autofocus filled dense @focus="inptState = true" @blur="keepFocus" v-model="target"
         :disable="scst === 2" type="text" label="Label" ref="ipttarget" color="green" />
+      <!-- <q-input autofocus filled dense v-model="target" :disable="scst === 2" type="text" label="Label" ref="ipttarget"
+        color="green"  /> -->
     </q-form>
   </q-page>
 </template>
@@ -88,12 +90,21 @@ const searchTarget = async () => {
   nextTick(() => { ipttarget.value.focus(); });
 }
 
+const keepFocus = () => {
+  nextTick(() => {
+    if (scst.value !== 2) {
+      ipttarget.value.focus()
+    }
+  });
+}
+
 </script>
 
 <style scoped>
 .hidded {
   bottom: -50%;
 }
+
 .carousel-bg {
   position: fixed;
   top: 0;
