@@ -1,12 +1,5 @@
 <template>
   <q-card flat class="bg-grey-1 q-pa-lg">
-
-    <!-- :ratio="16/9"
-          src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"
-        /> -->
-    <!-- <q-card-section>
-      {{ imgSource }}
-    </q-card-section> -->
     <q-card-section horizontal>
       <q-card-section class="q-pa-none">
         <q-card-section class="text-left text-blue-grey-7">
@@ -14,11 +7,14 @@
           <div class="text-subtitle text-grey-8 font-lg">{{ product.id }}</div>
         </q-card-section>
         <q-card-section>
+
           <div class="text-subtitle">{{ product.description }}</div>
         </q-card-section>
-        <q-card-section>
-          <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" />
-        </q-card-section>
+        <!-- <q-card-section> -->
+          <!-- <q-img :src="`/logos/${mosLog(product.category.familia.seccion.name)}`" spinner-color="grey-4" spinner-size="82px" size="100px" :ratio="16/9" /> -->
+          <!-- <q-img src="~assets/logogv.png" spinner-color="grey-4" spinner-size="82px" size="100px"  /> -->
+
+        <!-- </q-card-section> -->
       </q-card-section>
 
       <q-card-section style="width:300px;">
@@ -34,7 +30,8 @@
       </q-card-section>
 
       <q-card-section v-if="imgSource">
-        <video style="height: 300px; width: 450px;" :src="`https://grupovizcarra.net/vmedia/${product.imgcover}`" autoplay loop muted ></video>
+        <video style="height: 300px; width: 450px;" :src="`https://grupovizcarra.net/vmedia/${product.imgcover}`"
+          autoplay loop muted></video>
 
       </q-card-section>
 
@@ -61,4 +58,22 @@ const prices = computed(() => {
 const imgSource = computed(() => {
   return product.value.imgcover ? true : false;
 });
+
+const mosLog = (seccion) => {
+  switch (seccion) {
+    case 'Mochila':
+      return 'Mochila.png'
+
+    case 'Juguete':
+      return 'Juguete.jpeg'
+
+    case 'Navidad':
+      return 'Navidad.jpeg'
+
+    default:
+      return 'resto.png'
+      break;
+  }
+}
+
 </script>
