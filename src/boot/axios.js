@@ -9,6 +9,7 @@ import axios from 'axios'
 // for each client)
 // const vapi = axios.create({ baseURL: 'http://192.168.10.160:1920/vmedia/public/api/verificator' })
 const vapi = axios.create({ baseURL: 'http://192.168.10.189:8200/vmedia/public/api/verificator' });
+const vizmedia = `https://mersbock.s3.us-east-2.amazonaws.com/vhelpers`;
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -22,4 +23,4 @@ export default boot(({ app }) => {
   //       so you can easily perform requests against your app's API
 })
 
-export { vapi }
+export { vapi, vizmedia }

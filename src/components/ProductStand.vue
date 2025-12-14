@@ -10,11 +10,13 @@
 
           <div class="text-subtitle">{{ product.description }}</div>
         </q-card-section>
-        <!-- <q-card-section> -->
+        <q-card-section v-if="product.media.find(e => e.type == 'image')" class="flex flex-center">
           <!-- <q-img :src="`/logos/${mosLog(product.category.familia.seccion.name)}`" spinner-color="grey-4" spinner-size="82px" size="100px" :ratio="16/9" /> -->
+          <q-img :src="`${product.media.find(e => e.type == 'image').url}`" spinner-color="grey-4" spinner-size="82px"/>
+
           <!-- <q-img src="~assets/logogv.png" spinner-color="grey-4" spinner-size="82px" size="100px"  /> -->
 
-        <!-- </q-card-section> -->
+        </q-card-section>
       </q-card-section>
 
       <q-card-section style="width:300px;">
@@ -28,11 +30,9 @@
         <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces"><small>PxC:</small> <span
             class="text-bold text-green">{{ product.pieces }}</span></div>
       </q-card-section>
-
-      <q-card-section v-if="imgSource">
-        <video style="height: 300px; width: 450px;" :src="`https://grupovizcarra.net/vmedia/${product.imgcover}`"
+      <q-card-section v-if="product.media.find(e => e.type == 'video')">
+        <video style="height: 300px; width: 450px;" :src="`${product.media.find(e => e.type == 'video').url}`"
           autoplay loop muted></video>
-
       </q-card-section>
 
 
@@ -42,6 +42,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { vizmedia } from "boot/axios"
 
 const props = defineProps({
   data: { type: Object, default: {} }

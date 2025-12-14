@@ -1,5 +1,5 @@
 <template>
-  <q-card flat class="bg-grey-1 q-pa-lg" v-if="product.imgcover == null">
+  <q-card flat class="bg-grey-1 q-pa-lg" v-if="product.media.find(e => e.type == 'video') == null">
     <q-card-section horizontal>
       <q-card-section class="q-pa-none">
         <q-card-section class="text-left text-blue-grey-7">
@@ -9,8 +9,10 @@
         <q-card-section>
           <div class="text-subtitle">{{ product.description }}</div>
         </q-card-section>
-        <q-card-section>
-          <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" />
+        <q-card-section v-if="product.media.find(e => e.type == 'image')">
+          <q-img :src="`${product.media.find(e => e.type == 'image').url}`" spinner-color="grey-4" spinner-size="82px"
+            v-if="product.media.find(e => e.type == 'image')" />
+          <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" v-else />
         </q-card-section>
       </q-card-section>
 
@@ -21,7 +23,6 @@
             <q-item-section avatar class="text-blue-grey-14">${{ price.price }}</q-item-section>
           </q-item>
         </q-list>
-
         <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces"><small>PxC:</small> <span
             class="text-bold text-green">{{ product.pieces }}</span></div>
       </q-card-section>
@@ -30,7 +31,7 @@
 
 
   <div class="fullscreen-container" v-else>
-    <video class="background-video" :src="`https://grupovizcarra.net/vmedia/${product.imgcover}`" autoplay loop muted
+    <video class="background-video" :src="`${product.media.find(e => e.type == 'video').url}`" autoplay loop muted
       playsinline autobuffer>
     </video>
     <q-card class="info-card">
@@ -43,9 +44,16 @@
         <div class="text-subtitle">{{ product.description }}</div>
       </q-card-section>
 
-      <q-card-section>
+      <!-- <q-card-section>
         <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" />
+      </q-card-section> -->
+
+      <q-card-section v-if="product.media.find(e => e.type == 'image')">
+        <q-img :src="`${product.media.find(e => e.type == 'image').url}`" spinner-color="grey-4" spinner-size="82px"
+          v-if="product.media.find(e => e.type == 'image')" />
+        <q-img src="~assets/candytoyslogo.png" spinner-color="grey-4" spinner-size="82px" size="200px" v-else />
       </q-card-section>
+
 
       <q-card-section>
         <q-list separator style="font-size:1.5em;">
