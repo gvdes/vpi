@@ -3,7 +3,7 @@
     <div class="carousel-bg">
       <q-carousel v-model="slide" animated infinite :autoplay="autoplay" transition-prev="slide-right"
         transition-next="slide-left" @mouseenter="autoplay = false" @mouseleave="autoplay = true" height="100vh">
-        <q-carousel-slide :name="1" img-src="/Complements/imagen2.png" />
+        <q-carousel-slide :name="1" img-src="/Complements/azul.png" />
       </q-carousel>
     </div>
 
