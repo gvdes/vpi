@@ -7,15 +7,10 @@
           <div class="text-subtitle text-grey-8 font-lg">{{ product.id }}</div>
         </q-card-section>
         <q-card-section>
-
           <div class="text-subtitle">{{ product.description }}</div>
         </q-card-section>
-        <q-card-section v-if="product.media.find(e => e.type == 'image')" class="flex flex-center">
-          <!-- <q-img :src="`/logos/${mosLog(product.category.familia.seccion.name)}`" spinner-color="grey-4" spinner-size="82px" size="100px" :ratio="16/9" /> -->
-          <q-img :src="`${product.media.find(e => e.type == 'image').url}`" spinner-color="grey-4" spinner-size="82px"/>
-
-          <!-- <q-img src="~assets/logogv.png" spinner-color="grey-4" spinner-size="82px" size="100px"  /> -->
-
+        <q-card-section v-if="imageMedia" class="flex flex-center">
+          <q-img :src="imageMedia.url" spinner-color="grey-4" spinner-size="82px" />
         </q-card-section>
       </q-card-section>
 
@@ -26,55 +21,24 @@
             <q-item-section avatar class="text-blue-grey-14">${{ price.price }}</q-item-section>
           </q-item>
         </q-list>
-
-        <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces"><small>PxC:</small> <span
-            class="text-bold text-green">{{ product.pieces }}</span></div>
-      </q-card-section>
-      <q-card-section v-if="product.media.find(e => e.type == 'video')">
-        <video style="height: 300px; width: 450px;" :src="`${product.media.find(e => e.type == 'video').url}`"
-          autoplay loop muted></video>
+        <div class="q-pt-lg q-pr-md text-right text-h6 text-grey-8" v-if="product.pieces">
+          <small>PxC:</small> <span class="text-bold text-green">{{ product.pieces }}</span>
+        </div>
       </q-card-section>
 
-
+      <q-card-section v-if="videoMedia">
+        <video style="height: 300px; width: 450px;" :src="videoMedia.url" autoplay loop muted></video>
+      </q-card-section>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { vizmedia } from "boot/axios"
+import { useProduct } from 'src/composables/useProduct.js';
 
 const props = defineProps({
-  data: { type: Object, default: {} }
+  data: { type: Object, default: () => ({}) }
 });
 
-const product = ref(props.data);
-
-const prices = computed(() => {
-  if (product.value) {
-    return product.value.prices.length ? product.value.prices.filter(p => p._type <= 2 || p._type == 4).sort((a, b) => a._type - b._type) : [];
-  } else { return [] }
-});
-
-const imgSource = computed(() => {
-  return product.value.imgcover ? true : false;
-});
-
-const mosLog = (seccion) => {
-  switch (seccion) {
-    case 'Mochila':
-      return 'Mochila.png'
-
-    case 'Juguete':
-      return 'Juguete.jpeg'
-
-    case 'Navidad':
-      return 'Navidad.jpeg'
-
-    default:
-      return 'resto.png'
-      break;
-  }
-}
-
+const { product, imageMedia, videoMedia, prices } = useProduct(props);
 </script>

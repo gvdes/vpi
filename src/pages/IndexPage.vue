@@ -27,6 +27,7 @@
           <q-spinner-hourglass color="indigo-6" size="8em" />
         </div>
       </template>
+
       <template v-if="scst == 3">
         <ProductStand :data="product" />
       </template>
@@ -46,58 +47,22 @@
     <q-form @submit="searchTarget" class="fixed-bottom hidded">
       <q-input autofocus filled dense @focus="inptState = true" @blur="keepFocus" v-model="target"
         :disable="scst === 2" type="text" label="Label" ref="ipttarget" color="green" />
-      <!-- <q-input autofocus filled dense v-model="target" :disable="scst === 2" type="text" label="Label" ref="ipttarget"
-        color="green"  /> -->
     </q-form>
   </q-page>
 </template>
 
 <script setup>
-import { ref, nextTick, computed } from 'vue';
-import { useQuasar } from 'quasar';
+import { ref } from 'vue';
 import ProductStand from 'src/components/ProductStand.vue';
-import API from 'src/api/api.js'
+import { useProductSearch } from 'src/composables/useProductSearch.js';
 
-const $q = useQuasar();
-const scst = ref(1);
-const target = ref("");
-const inptState = ref(false);
-const ipttarget = ref(null);
-const product = ref(null);
-const timeouts = ref(null);
+const { scst, target, inptState, ipttarget, product, searchTarget, keepFocus } = useProductSearch({
+  resetDelay: 10000,
+  notFoundDelay: 7000,
+});
+
 const slide = ref(1);
-const autoplay = ref(true)
-const fullscreen = ref(true)
-
-const searchTarget = async () => {
-  timeouts.value ? clearTimeout(timeouts.value) : null;
-
-  scst.value = 2;
-  const params = { target: target.value }
-  const response = await API.info({ params });
-  console.log(response);
-
-  if (response.status == 200) {
-    product.value = response.data.product;
-    scst.value = 3;
-    timeouts.value = setTimeout(() => { scst.value = 1; }, 10000);
-  } else if (response.status == 404) {
-    scst.value = 4;
-    timeouts.value = setTimeout(() => { scst.value = 1; }, 7000);
-  }
-
-  target.value = "";
-  nextTick(() => { ipttarget.value.focus(); });
-}
-
-const keepFocus = () => {
-  nextTick(() => {
-    if (scst.value !== 2) {
-      ipttarget.value.focus()
-    }
-  });
-}
-
+const autoplay = ref(true);
 </script>
 
 <style scoped>

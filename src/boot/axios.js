@@ -7,8 +7,7 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-// const vapi = axios.create({ baseURL: 'http://192.168.10.160:1920/vmedia/public/api/verificator' })
-const vapi = axios.create({ baseURL: 'http://192.168.10.189:8200/vmedia/public/api/verificator' });
+const vapi = axios.create({ baseURL: import.meta.env.VITE_API_BASE });
 const vizmedia = `https://mersbock.s3.us-east-2.amazonaws.com/vhelpers`;
 
 export default boot(({ app }) => {

@@ -2,6 +2,11 @@
 .thumbs.db
 node_modules
 
+# Environment variables - never commit real IPs/secrets
+.env
+.env.local
+.env.*.local
+
 # Quasar core related directories
 .quasar
 
